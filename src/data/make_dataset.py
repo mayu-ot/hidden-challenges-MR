@@ -40,6 +40,23 @@ def main(input_charade_sta, input_charade_v1, output_filepath):
     # save merged data
     merge_df.to_csv(output_filepath, index=False)
 
+def save_vfeat_h5(split):
+    logger = logging.getLogger(__name__)
+    logger.info('save visual features in hdf5 format')
+    
+    vfeat_root = 'data/raw/Charades_v1_features_rgb/'
+    df = pd.read_csv(f'data/processed/{split}.csv')
+
+    with h5py.File(f"data/processed/{split}_vfeat.h5", "w") as hf:
+
+        for video in tqdm(df['id'].unique()):
+            dir_name = vfeat_root+f"{video}"
+            f_files = os.listdir(dir_name)
+            f_files.sort()
+            v_feat = [np.loadtxt(f"{dir_name}/{f}") for f in f_files]
+            v_feat = np.vstack(v_feat).astype('f')
+
+            hf.create_dataset(video, data=v_feat)
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
