@@ -52,6 +52,10 @@ Project Organization
     └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 
 
+export CFLAGS=-I/home/otani_mayu/.cudnn/active/cuda/include
+export LDFLAGS=-L/home/otani_mayu/.cudnn/active/cuda/lib64
+export LD_LIBRARY_PATH=/home/otani_mayu/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
+
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>

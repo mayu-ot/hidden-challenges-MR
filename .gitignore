@@ -87,3 +87,10 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# My settings
+models/
+data/
+credentials.json
+*.mp4
+*.pkl
