@@ -11,7 +11,6 @@ def _load_top_actions(data_name="charade"):
         for line in open(f"data/processed/{data_name}/top50_actions")
     ]
 
-
 def sentence2token(sentence: str) -> Tuple[List[str], List[str]]:
     tokens = _nlp(sentence)
 

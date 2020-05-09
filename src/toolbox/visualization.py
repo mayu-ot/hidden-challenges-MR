@@ -142,6 +142,6 @@ def plot_performance_per_duration(
         bins=20,
         stacked=True,
         label=["success", "failure"],
-        color=["mediumseagreen", "gray"],
+        color=["#9c47ff", "#606060"],
     )
     ax.legend(frameon=False, fontsize=14)

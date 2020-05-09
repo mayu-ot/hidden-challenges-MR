@@ -37,6 +37,7 @@ def evaluate(
         prediction_found = False
         
         for pred_instance in prediction:
+            metrics = {}
             query, pred_locs, rating = pred_instance
             if gt_query == query:
                 prediction_found = True
@@ -47,7 +48,6 @@ def evaluate(
                 bbox = bbox[np.argsort(rating)[::-1]]
                 overlap = _tiou(bbox, gt_loc[:2])
 
-                metrics = {}
                 for k in top_k:
                     for thresh in iou_threshold:
                         is_success = (overlap > thresh)[:k].any()

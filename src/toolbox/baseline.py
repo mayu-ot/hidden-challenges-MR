@@ -13,6 +13,7 @@ Result = Tuple[Query, List[Location], Rating, dict]
 class SegmentGeneratorKDE(object):
     def __init__(self):
         self.kernels = {}
+        self.modes = {}
         self.vocab = []
 
     def fit(self, label, instances):
@@ -25,8 +26,11 @@ class SegmentGeneratorKDE(object):
         start = np.clip(start, 0, 1)
         duration = np.min(np.vstack((duration, 1 - start)), axis=0)
         print(f"#instances: {len(start)}")
-        self.kernels[label] = gaussian_kde(np.vstack([start, duration]))
-
+        samples = np.vstack([start, duration])
+        self.kernels[label] = gaussian_kde(samples)
+        height = self.kernels[label].pdf(samples)
+        self.modes[label] = samples[:, np.argmax(height)]
+        
         if label not in self.vocab:
             self.vocab.append(label)
 
