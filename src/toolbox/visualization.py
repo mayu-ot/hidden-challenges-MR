@@ -39,8 +39,8 @@ def plot_performance_per_class(
     fig = plt.figure(figsize=(15, 3))
     _ = plt.xticks(np.arange(N_cls), keys, rotation=60, fontsize=14)
 
-    plt.bar(np.arange(N_cls), n_instance, color="gray", label="failure")
-    plt.bar(np.arange(N_cls), n_success, color="mediumseagreen", label="success")
+    plt.bar(np.arange(N_cls), n_instance, color="#606060", label="failure")
+    plt.bar(np.arange(N_cls), n_success, color="#9c47ff", label="success")
     plt.legend(frameon=False, fontsize=14)
     sns.despine()
 
