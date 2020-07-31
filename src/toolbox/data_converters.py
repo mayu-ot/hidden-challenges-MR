@@ -20,7 +20,7 @@ def ActivityNetCap2Instances(raw_data: dict) -> List[Instance]:
     return instances
 
 
-def Charade2Instances(raw_data: DataFrame) -> List[Instance]:
+def CharadesSTA2Instances(raw_data: DataFrame) -> List[Instance]:
     instances = []
     for _, row in raw_data.iterrows():
         query = (row["id"], row["description"])

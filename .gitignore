@@ -94,3 +94,5 @@ data/
 credentials.json
 *.mp4
 *.pkl
+*.png
+*.pdf
