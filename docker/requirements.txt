@@ -1,0 +1,6 @@
+click==7.1.2
+scipy==1.5.2
+seaborn==0.10.1
+spacy==2.3.2
+scikit-video==1.1.11 # optional (used for visualizing dataset examples)
+neptune-client==0.4.98 # optional (used for downloading files from experiments hosted on neptune.ai)
