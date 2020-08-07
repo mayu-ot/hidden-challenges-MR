@@ -1,7 +1,9 @@
 from typing import Tuple, List, Dict, Callable
+from multiprocessing import Pool
 import numpy as np
 from .utils import sentence2token, _nms
 from .baseline import SegmentGeneratorKDE
+from tqdm import tqdm
 
 Query = Tuple[str, str]
 Location = Tuple[float, float, float]  # start, end, length
@@ -20,6 +22,7 @@ def _tiou(pred: np.ndarray, gt: Tuple[float, float]):
     union = np.maximum(0.0, union_right - union_left)
     return 1.0 * inter / union
 
+
 def evaluate(
     groundtruth: List[Instance],
     prediction: List[Prediction],
@@ -32,10 +35,10 @@ def evaluate(
 
     results = []
 
-    for gt_instance in groundtruth:
+    for gt_instance in tqdm(groundtruth, desc="evaluating"):
         gt_query, gt_loc = gt_instance
         prediction_found = False
-        
+
         for pred_instance in prediction:
             metrics = {}
             query, pred_locs, rating = pred_instance
@@ -55,7 +58,7 @@ def evaluate(
 
                 results.append((query, pred_locs, rating, metrics))
                 break
-                
+
         if not prediction_found:
             for k in top_k:
                 for thresh in iou_threshold:
@@ -71,7 +74,7 @@ def accumulate_metrics(results: List[Result]) -> dict:
     accum_metrics: dict = {metric_type: [] for metric_type in metrics.keys()}
 
     for _, _, _, metrics in results:
-            
+
         for metric_type, is_success in metrics.items():
             accum_metrics[metric_type].append(is_success)
 

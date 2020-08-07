@@ -5,11 +5,12 @@ import spacy
 _nlp = spacy.load("en_core_web_sm")
 
 
-def _load_top_actions(data_name="charade"):
+def _load_top_actions(data_name="charades"):
     return [
         line.rstrip()
         for line in open(f"data/processed/{data_name}/top50_actions")
     ]
+
 
 def sentence2token(sentence: str) -> Tuple[List[str], List[str]]:
     tokens = _nlp(sentence)

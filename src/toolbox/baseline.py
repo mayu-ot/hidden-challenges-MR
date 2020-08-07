@@ -1,6 +1,8 @@
-from typing import Tuple, List, Dict, Callable
+from typing import Tuple, List, Callable
 from scipy.stats import gaussian_kde
 import numpy as np
+from .utils import sentence2token, _nms
+from tqdm import tqdm
 
 Query = Tuple[str, str]
 Location = Tuple[float, float, float]  # start, end, length
@@ -30,7 +32,7 @@ class SegmentGeneratorKDE(object):
         self.kernels[label] = gaussian_kde(samples)
         height = self.kernels[label].pdf(samples)
         self.modes[label] = samples[:, np.argmax(height)]
-        
+
         if label not in self.vocab:
             self.vocab.append(label)
 
@@ -53,6 +55,7 @@ class SegmentGeneratorKDE(object):
 
         return samples, likelifood
 
+
 def predict(
     segment_generator: SegmentGeneratorKDE,
     instances: List[Instance],
@@ -60,7 +63,7 @@ def predict(
     top_k: int = 10,
 ):
     predictions = []
-    for instance in instances:
+    for instance in tqdm(instances, desc="predicting"):
         query, location = instance
         length = location[-1]
 
