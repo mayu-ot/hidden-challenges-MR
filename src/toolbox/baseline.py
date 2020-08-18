@@ -1,4 +1,5 @@
-from typing import Tuple, List, Callable
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from typing import Tuple, List
 from scipy.stats import gaussian_kde
 import numpy as np
 from .utils import sentence2token, _nms
@@ -56,43 +57,60 @@ class SegmentGeneratorKDE(object):
         return samples, likelifood
 
 
+def predict_job(
+    segment_generator: SegmentGeneratorKDE,
+    instance: Instance,
+    nms_threshold: float,
+    top_k: int,
+) -> Tuple[Query, List[Location], List[float]]:
+    query, location = instance
+    length = location[-1]
+
+    actions, objects = sentence2token(query[1])
+
+    if len(actions):
+        actions = [
+            action
+            for action in actions
+            if action in segment_generator.vocab
+        ]
+        action = actions[0] if len(actions) else "base"
+        samples, likelifood = segment_generator.sample(action, 100)
+    else:
+        samples, likelifood = segment_generator.sample("base", 100)
+
+    bbox = samples.copy()
+    bbox[:, 1] = bbox.sum(axis=1)
+
+    valid = (bbox[:, 1] - bbox[:, 0]) > 0
+    bbox = bbox[valid]
+    likelifood = likelifood[valid]
+
+    keep = _nms(bbox, likelifood, nms_threshold, top_k=top_k)
+    bbox = bbox[keep]
+    likelifood = likelifood[keep]
+
+    location = np.hstack([bbox * length, np.ones((len(bbox), 1)) * length])
+    return query, location.tolist(), likelifood.tolist()
+
+
 def predict(
     segment_generator: SegmentGeneratorKDE,
     instances: List[Instance],
     nms_threshold: float = 0.45,
     top_k: int = 10,
-):
+) -> List[Tuple[Query, List[Location], List[float]]]:
     predictions = []
-    for instance in tqdm(instances, desc="predicting"):
-        query, location = instance
-        length = location[-1]
+    progress = tqdm(total=len(instances))
 
-        actions, objects = sentence2token(query[1])
+    with ProcessPoolExecutor(8) as pool:
+        futures = []
 
-        if len(actions):
-            actions = [
-                action
-                for action in actions
-                if action in segment_generator.vocab
-            ]
-            action = actions[0] if len(actions) else "base"
-            samples, likelifood = segment_generator.sample(action, 100)
-        else:
-            samples, likelifood = segment_generator.sample("base", 100)
+        for instance in instances:
+            future = pool.submit(predict_job, segment_generator, instance, nms_threshold, top_k)
+            futures.append(future)
 
-        bbox = samples.copy()
-        bbox[:, 1] = bbox.sum(axis=1)
-
-        valid = (bbox[:, 1] - bbox[:, 0]) > 0
-        bbox = bbox[valid]
-        likelifood = likelifood[valid]
-
-        keep = _nms(bbox, likelifood, nms_threshold, top_k=top_k)
-        bbox = bbox[keep]
-        likelifood = likelifood[keep]
-
-        location = np.hstack([bbox * length, np.ones((len(bbox), 1)) * length])
-
-        predictions.append((query, location.tolist(), likelifood.tolist()))
-
+        for future in as_completed(futures):
+            progress.update(1)
+            predictions.append(future.result())
     return predictions
