@@ -1,5 +1,6 @@
 from typing import Dict
 import pandas as pd
+import os
 import json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -107,6 +108,10 @@ def plot_performance_summary(
     plt.legend()
     plt.title(title)
     sns.despine(left=False)
+
+    if not os.path.exists(os.path.dirname(outfile)):
+        os.makedirs(os.path.dirname(outfile))
+
     plt.savefig(outfile, bbox_inches="tight")
 
 
