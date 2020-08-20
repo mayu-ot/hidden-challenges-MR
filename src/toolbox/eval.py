@@ -1,8 +1,6 @@
 from typing import Tuple, List, Dict, Callable
-from multiprocessing import Pool
 import numpy as np
-from .utils import sentence2token, _nms
-from .baseline import SegmentGeneratorKDE
+from .utils import sentence2token
 from tqdm import tqdm
 
 Query = Tuple[str, str]
