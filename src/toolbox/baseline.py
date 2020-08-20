@@ -28,7 +28,7 @@ class SegmentGeneratorKDE(object):
 
         start = np.clip(start, 0, 1)
         duration = np.min(np.vstack((duration, 1 - start)), axis=0)
-        print(f"#instances: {len(start)}")
+        print(f"[{label}] trained on {len(start)} samples")
         samples = np.vstack([start, duration])
         self.kernels[label] = gaussian_kde(samples)
         height = self.kernels[label].pdf(samples)
@@ -70,9 +70,7 @@ def predict_job(
 
     if len(actions):
         actions = [
-            action
-            for action in actions
-            if action in segment_generator.vocab
+            action for action in actions if action in segment_generator.vocab
         ]
         action = actions[0] if len(actions) else "base"
         samples, likelifood = segment_generator.sample(action, 100)
@@ -107,7 +105,9 @@ def predict(
         futures = []
 
         for instance in instances:
-            future = pool.submit(predict_job, segment_generator, instance, nms_threshold, top_k)
+            future = pool.submit(
+                predict_job, segment_generator, instance, nms_threshold, top_k
+            )
             futures.append(future)
 
         for future in as_completed(futures):
