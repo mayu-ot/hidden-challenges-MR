@@ -67,7 +67,7 @@ Download annotations [here](https://cs.stanford.edu/people/ranjaykrishna/densevi
 :/app# python src/experiments/blind_baselines.py activitynet
 ```
 
-## Eval your model's outputs
+## Evaluate your model's outputs
 
 `src/toolbox` provides tools for evaluation and visualization of moment retrieval.
 For example, evaluation on Charades-STA is done as:
@@ -117,7 +117,7 @@ predictions[0]
   ...])
 ```
 
-`summary` is a dictionaly of metrics (R@k (IoU>m)).
+`summary` is a dictionary of metrics (R@k (IoU>m)).
 Examples of how to use our toolbox are in `src/experiments/blind_baselines.py` or notebooks (e.g., 
 `notebooks/report/SCDM_CharadeSTA.ipynb`).
 
