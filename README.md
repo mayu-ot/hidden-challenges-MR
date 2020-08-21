@@ -4,12 +4,16 @@ hidden-challenges-MR
 Codes of our paper "Uncovering Hidden Challenges in Query-Based Video Moment Retrieval" (BMVC'20)
 
 ## Dependencies
-
-The code is tested with Python 3.8.
-
+Docker (recommended)
 ```shell
 $ docker build -t hidden-challenges-mr .
 ```
+
+or
+```shell
+$ pip install -r requirements.txt
+```
+This code is tested with Python3.8
 
 ### Neptune.ai (optional)
 
