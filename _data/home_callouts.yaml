@@ -1,0 +1,18 @@
+style: is-light
+items:
+  - title: Paper
+    subtitle: BMVC'20 paper and supplementary
+    icon: fa-copy
+    call_to_action_name: PDF
+    call_to_action_link: /page-1/
+  - title: Experiments
+    subtitle: Experiments and notebooks
+    icon: fa-flask
+    call_to_action_name: neptune.ai
+    call_to_action_link: https://ui.neptune.ai/mayu-ot/moment-retrieval/experiments?viewId=standard-view
+  - title: Code
+    subtitle: Evaluation and visualization toolkit
+    icon: fa-github
+    icon_brand: true
+    call_to_action_name: GitHub
+    call_to_action_link: /page-1/
