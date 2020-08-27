@@ -127,7 +127,7 @@ Examples of how to use our toolbox are in `src/experiments/blind_baselines.py` o
 
 If this work helps your research, please cite:
 ```
-@article{otani2020challengesmr,
+@inproceedings{otani2020challengesmr,
 author={Mayu Otani, Yuta Nakahima, Esa Rahtu, and Janne Heikkil{\"{a}}},
 title = {Uncovering Hidden Challenges in Query-Based Video Moment Retrieval},
 booktitle={The British Machine Vision Conference (BMVC)},
