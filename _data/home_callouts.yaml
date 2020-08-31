@@ -4,7 +4,7 @@ items:
     subtitle: BMVC'20 paper and supplementary
     icon: fa-copy
     call_to_action_name: PDF
-    call_to_action_link: /page-1/
+    call_to_action_link: /download/paper.pdf
   - title: Experiments
     subtitle: Experiments and notebooks
     icon: fa-flask
@@ -15,4 +15,4 @@ items:
     icon: fa-github
     icon_brand: true
     call_to_action_name: GitHub
-    call_to_action_link: /page-1/
+    call_to_action_link: https://github.com/mayu-ot/hidden-challenges-MR
