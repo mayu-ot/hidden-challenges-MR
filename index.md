@@ -4,8 +4,9 @@
 
 layout: page
 title: Uncovering Hidden Challenges in Query-based Video Moment Retrieval
-subtitle: Mayu Otani, Yuta Nakashima, Esa Rahtu, Janne Heikkilä
+subtitle: <a href="https://mayu-ot.github.io/">Mayu Otani</a>, <a href="https://www.n-yuta.jp/">Yuta Nakashima</a>, <a href="https://esa.rahtu.fi/">Esa Rahtu</a>, <a href="https://www.oulu.fi/university/researcher/janne-heikkila">Janne Heikkilä</a>
 callouts: home_callouts
+show_sidebar: true
 ---
 
 # Overview
