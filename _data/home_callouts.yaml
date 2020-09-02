@@ -3,8 +3,8 @@ items:
   - title: Paper
     subtitle: BMVC'20 paper and supplementary
     icon: fa-copy
-    call_to_action_name: PDF
-    call_to_action_link: /download/paper.pdf
+    call_to_action_name: arXiv
+    call_to_action_link: https://arxiv.org/abs/2009.00325
   - title: Experiments
     subtitle: Experiments and notebooks
     icon: fa-flask
