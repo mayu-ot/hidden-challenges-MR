@@ -3,6 +3,8 @@ hidden-challenges-MR
 
 Codes of our paper "Uncovering Hidden Challenges in Query-Based Video Moment Retrieval" (BMVC'20)
 
+[[Project page](https://mayu-ot.github.io/hidden-challenges-MR/) | [arXiv](https://arxiv.org/abs/2009.00325) | [YouTube](https://www.youtube.com/watch?v=A_W50Zz6TuE&feature=emb_title) ]
+
 ## Dependencies
 Docker (recommended)
 ```shell
