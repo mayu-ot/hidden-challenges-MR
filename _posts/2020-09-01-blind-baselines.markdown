@@ -3,7 +3,7 @@ layout: post
 title: How Well are the Blind Baselines?
 date: 2020-09-1
 categories: tldr
-image: ./img/charades-leaderboard.png
+image: https://raw.githubusercontent.com/mayu-ot/hidden-challenges-MR/gh-pages/img/charades-leaderboard.png
 ---
 
 #### Blind Baselines Perform Unexpectedly Well

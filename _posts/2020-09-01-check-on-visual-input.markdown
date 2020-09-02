@@ -3,7 +3,7 @@ layout: post
 title: Checks on Visual Input
 date:   2020-09-1
 categories: tldr
-image: ./img/vis_check.png
+image: https://raw.githubusercontent.com/mayu-ot/hidden-challenges-MR/gh-pages/img/vis_check.png
 ---
 
 #### SOTA Models Often Ignores Visual Input
