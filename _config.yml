@@ -17,7 +17,6 @@ title: Hidden Challenges MR
 # email: otani_mayu@cyberagent.co.jp
 description: >- # this means to ignore newlines until "baseurl:"
   Project page of our paper "Uncovering Hidden Challenges in Query-based Video Moment Retrieval" (BMVC 2020)
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: jekyllrb
 github_username:  mayu-ot
@@ -32,6 +31,7 @@ remote_theme: chrisrhymes/bulma-clean-theme
 baseurl: "/hidden-challenges-MR"
 plugins:
 - github-pages
+name: Uncovering Hidden Challenges in Query-based Video Moment Retrieval
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
